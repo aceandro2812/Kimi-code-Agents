@@ -1,0 +1,39 @@
+version: 1
+agent:
+  name: global-root
+  system_prompt_path: ./prompts/root.md
+
+  tools:
+    - "kimi_cli.tools.multiagent:Task"
+    - "kimi_cli.tools.multiagent:CreateSubagent"
+    - "kimi_cli.tools.web:SearchWeb"
+    - "kimi_cli.tools.web:FetchURL"
+    - "kimi_cli.tools.shell:Shell"
+    - "kimi_cli.tools.file:ReadFile"
+    - "kimi_cli.tools.file:WriteFile"
+    - "kimi_cli.tools.file:Glob"
+    - "kimi_cli.tools.file:Grep"
+    - "kimi_cli.tools.file:StrReplaceFile"
+    - "kimi_cli.tools.ask_user:AskUserQuestion"
+    - "kimi_cli.tools.todo:SetTodoList"
+
+  subagents:
+    coder:
+      path: ./coder.yaml
+      description: "Expert implementation engineer"
+
+    reviewer:
+      path: ./reviewer.yaml
+      description: "Senior code reviewer"
+
+    planner:
+      path: ./planner.yaml
+      description: "Software architect and system designer"
+
+    tester:
+      path: ./tester.yaml
+      description: "Testing and QA expert"
+
+    refactorer:
+      path: ./refactorer.yaml
+      description: "Code optimization and cleanup expert"
